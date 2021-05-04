@@ -44,7 +44,7 @@ export default function Character({ characterData }) {
         </div>
         <div>
           {urlArray.map( item => (
-            <MarvelLink urlData={item}/>
+            <MarvelLink urlData={item} key={item.type}/>
           ))}
         </div>
     </div>
