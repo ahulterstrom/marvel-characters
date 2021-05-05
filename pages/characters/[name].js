@@ -1,5 +1,5 @@
 import Layout from '../../components/mlayout'
-import Image from 'next/image'
+// import Image from 'next/image'
 import Head from 'next/head'
 import utilStyles from '../../styles/utils.module.scss'
 import { getAllCharacterNames, getCharacterPageData } from '../../lib/characters'
@@ -44,13 +44,17 @@ export default function Character({ characterData }) {
       <h1>
         {characterData.pageData[0].name}
       </h1>
-      <Image
+      {/* <Image
         priority
         src={characterData.pageData[0].thumbnail.path + "." + characterData.pageData[0].thumbnail.extension}
         className={utilStyles.borderCircle}
         height={200}
         width={200}
-        alt={characterData.pageData[0].name} />
+        alt={characterData.pageData[0].name} /> */}
+        <img src={characterData.pageData[0].thumbnail.path + "." + characterData.pageData[0].thumbnail.extension} 
+        className={`${utilStyles.borderCircle} ${utilStyles.characterImage}`}
+        height={200}
+        width={200} />
       <div>
         <p>{characterData.pageData[0].description}</p>
       </div>

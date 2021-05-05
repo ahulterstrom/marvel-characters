@@ -1,7 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
+// import Image from 'next/image'
 import styles from './mlayout.module.css'
-import utilStyles from '../styles/utils.module.scss'
 import Link from 'next/link'
 
 const name = 'Marvel'
@@ -21,7 +20,7 @@ export default function Layout({ children, home }) {
             <header className={styles.header}>
                 {home ? (
                     <>
-                        <Image
+                        {/* <Image
                             priority
                             src="/images/Marvel_Logo.svg"
                             className={styles.logo}
@@ -29,13 +28,19 @@ export default function Layout({ children, home }) {
                             width={500}
                             alt={name}
                             quality={100}
+                        /> */}
+                        <img
+                            src="images/Marvel_Logo.svg"
+                            className={styles.logo}
+                            height={201}
+                            width={500}
                         />
                     </>
                 ) : (
                     <>
                         <Link href="/marvel">
                             <a>
-                                <Image
+                                {/* <Image
                                     priority
                                     src="/images/Marvel_Logo.svg"
                                     className={styles.logo}
@@ -43,6 +48,12 @@ export default function Layout({ children, home }) {
                                     width={250}
                                     alt={name}
                                     quality={100}
+                                /> */}
+                                <img
+                                    src="images/Marvel_Logo.svg"
+                                    className={styles.logo}
+                                    height={100}
+                                    width={250}
                                 />
                             </a>
                         </Link>
@@ -54,12 +65,12 @@ export default function Layout({ children, home }) {
 
             </div>
             {!home && (
-                    <div className={styles.backToHome}>
-                        <Link href="/marvel">
-                            <a>← Back to home</a>
-                        </Link>
-                    </div>
-                )}
+                <div className={styles.backToHome}>
+                    <Link href="/">
+                        <a>← Back to home</a>
+                    </Link>
+                </div>
+            )}
             <div className={styles.footer}>
                 <p>Data provided by Marvel. © 2014 Marvel</p>
             </div>

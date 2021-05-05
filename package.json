@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "buildexport": "next build && next export"
   },
   "dependencies": {
     "crypto-js": "^4.0.0",

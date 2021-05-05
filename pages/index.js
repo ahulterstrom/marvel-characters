@@ -1,49 +1,75 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import Date from '../components/date'
-import Layout, { siteTitle } from '../components/layout'
+import { useState } from 'react'
+import Character from '../components/characterSearchItem'
+import Layout, { siteTitle } from '../components/mlayout'
 import utilStyles from '../styles/utils.module.scss'
-import { getSortedPostsData } from '../lib/posts'
+import Fuse from 'fuse.js'
+import { getCharacterData } from '../lib/characters'
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+    let allCharacterData = [];
 
-  return {
-    props: {
-      allPostsData
+    for (var i = 0; i < 300; i += 100) {
+        const newCharacterData = await getCharacterData(i);
+        allCharacterData = allCharacterData.concat(await newCharacterData);
     }
-  }
+    return {
+        props: {
+            allCharacterData
+        }
+    }
 }
 
-export default function Home({ allPostsData }) {
-  return (
-    <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
-      <section className={utilStyles.headingMd}>
-        <p>[Your Self Introduction]</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this on{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
-      </section>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>
-                <a>{title}</a>
-              </Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </Layout>
-  )
+function Search(props) {
+    const allCharacters = props.data;
+    const [filteredCharacters, updateFilteredCharacters] = useState([])
+
+    const inputUpdate = event => {
+        const options = {
+            keys: ['name'],
+            includeScore: true,
+        }
+        const fuse = new Fuse(allCharacters, options);
+
+        updateFilteredCharacters((fuse.search(event.target.value).filter(item => { if (item.score < 0.1) { return item } })))
+    }
+
+    return (
+        <section>
+            <div className={utilStyles.searchbar}>
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    onChange={inputUpdate}
+
+                />
+                <div className={utilStyles.search}></div>
+            </div>
+            <section>
+                <ul className={utilStyles.list}>
+                    {filteredCharacters.map(({ item }) => (
+                        <li className={utilStyles.listItem} key={item.name}>
+                            <Character characterData={item}/>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        </section>
+    )
+}
+
+export default function Home({ allCharacterData }) {
+    let includedCharacters = JSON.parse(JSON.stringify(allCharacterData));
+
+    return (
+        <Layout home>
+            <Head>
+                <title>{siteTitle}</title>
+            </Head>
+            <section className={utilStyles.headingMd}>
+                <Search data={includedCharacters} />
+            </section>
+
+        </Layout>
+    )
 }
