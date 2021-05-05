@@ -3,9 +3,12 @@ import Image from 'next/image'
 import utilStyles from '../styles/utils.module.scss'
 
 export default function characterSearchItem({ characterData }) {
+
+
+
     return (
         <div className={utilStyles.clickableBox}>
-            <Link href={`/characters/${characterData.name}`} >
+            <Link href={`/characters/${encodeURIComponent(characterData.name)}`} >
                 <div className={utilStyles.listItem}>
                     <Image
                         src={characterData.thumbnail.path + "." + characterData.thumbnail.extension}

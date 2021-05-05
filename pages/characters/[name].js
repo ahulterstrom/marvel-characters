@@ -6,7 +6,19 @@ import { getAllCharacterNames, getCharacterPageData } from '../../lib/characters
 import MarvelLink from '../../components/marvelLink'
 
 export async function getStaticProps({ params }) {
-  const characterData = await getCharacterPageData(params.name)
+  let currentName = params.name;
+
+  if (currentName === "Araña") {
+    currentName = "Arana"
+  }
+  else if (currentName === "Edward \"Ted\" Forrester") {
+    currentName = "Edward%20%22Ted%22%20Forrester"
+  }
+  else if (currentName === "Dog Brother #1") {
+    currentName = "Dog%20Brother%20%231";
+  }
+
+  const characterData = await getCharacterPageData(currentName)
   return {
     props: {
       characterData
@@ -39,14 +51,14 @@ export default function Character({ characterData }) {
         height={200}
         width={200}
         alt={characterData.pageData[0].name} />
-        <div>
-          <p>{characterData.pageData[0].description}</p>
-        </div>
-        <div>
-          {urlArray.map( item => (
-            <MarvelLink urlData={item} key={item.type}/>
-          ))}
-        </div>
+      <div>
+        <p>{characterData.pageData[0].description}</p>
+      </div>
+      <div>
+        {urlArray.map(item => (
+          <MarvelLink urlData={item} key={item.type} />
+        ))}
+      </div>
     </div>
 
   </Layout>)

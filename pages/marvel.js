@@ -11,7 +11,7 @@ import { getCharacterData } from '../lib/characters'
 export async function getStaticProps() {
     let allCharacterData = [];
 
-    for (var i = 0; i < 50; i += 100) {
+    for (var i = 0; i < 1; i += 100) {
         const newCharacterData = await getCharacterData(i);
         allCharacterData = allCharacterData.concat(await newCharacterData);
     }
@@ -69,7 +69,7 @@ export default function Home({ allCharacterData }) {
                 <title>{siteTitle}</title>
             </Head>
             <section className={utilStyles.headingMd}>
-                <h2 className={utilStyles.heading2Xl}>Search Marvel Characters</h2>
+                {/* <h2 className={utilStyles.heading2Xl}>Search Marvel Characters</h2> */}
                 <Search data={includedCharacters} />
             </section>
 
