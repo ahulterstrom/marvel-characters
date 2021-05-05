@@ -80,6 +80,20 @@
     }
   }
 
+  .button {
+    display: inline-block;
+    padding: 0 1rem;
+    margin: 1rem;
+    border-radius: 10px;
+    color: white;
+    background: #ED1D24;
+    box-shadow: 0 0 10px 0 #ED1D24,
+    0 5px 15px 0 rgba(0, 0, 0, 0.2);
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
   .searchbar {
     position: relative;
     margin: auto;
