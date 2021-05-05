@@ -9,7 +9,7 @@ import { getCharacterData } from '../lib/characters'
 export async function getStaticProps() {
     let allCharacterData = [];
 
-    for (var i = 0; i < 300; i += 100) {
+    for (var i = 0; i < 1; i += 100) {
         const newCharacterData = await getCharacterData(i);
         allCharacterData = allCharacterData.concat(await newCharacterData);
     }
