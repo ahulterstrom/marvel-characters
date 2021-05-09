@@ -33,14 +33,14 @@ export async function getStaticPaths() {
 }
 
 export default function Character({ characterData }) {
-  let urlArray = characterData.pageData[0].urls;
+  let urlArray = characterData.response[0].urls;
   return (<Layout>
     <Head>
-      <title>{characterData.pageData[0].name}</title>
+      <title>{characterData.response[0].name}</title>
     </Head>
     <div className={utilStyles.content}>
       <h1>
-        {characterData.pageData[0].name}
+        {characterData.response[0].name}
       </h1>
       {/* <Image
         priority
@@ -49,12 +49,12 @@ export default function Character({ characterData }) {
         height={200}
         width={200}
         alt={characterData.pageData[0].name} /> */}
-      <img src={characterData.pageData[0].thumbnail.path + '.' + characterData.pageData[0].thumbnail.extension}
+      <img src={characterData.response[0].thumbnail.path + '.' + characterData.response[0].thumbnail.extension}
            className={`${utilStyles.borderCircle} ${utilStyles.characterImage}`}
            height={200}
            width={200} />
       <div>
-        <p>{characterData.pageData[0].description}</p>
+        <p>{characterData.response[0].description}</p>
       </div>
       <div>
         {urlArray.map(item => (
