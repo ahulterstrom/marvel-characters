@@ -2,6 +2,7 @@ import Layout from '../../components/mlayout';
 // import Image from 'next/image'
 import Head from 'next/head';
 import utilStyles from '../../styles/utils.module.scss';
+import styled from 'styled-components';
 import { getAllCharacterNames, getCharacterPageData } from '../../lib/characters';
 import MarvelLink from '../../components/marvelLink';
 
@@ -35,33 +36,41 @@ export async function getStaticPaths() {
 export default function Character({ characterData }) {
   let urlArray = characterData.response[0].urls;
   return (<Layout>
-    <Head>
-      <title>{characterData.response[0].name}</title>
-    </Head>
-    <div className={utilStyles.content}>
-      <h1>
-        {characterData.response[0].name}
-      </h1>
-      {/* <Image
+    <CharacterPageStyles>
+      <Head>
+        <title>{characterData.response[0].name}</title>
+      </Head>
+      <div className={utilStyles.content}>
+        <h1>
+          {characterData.response[0].name}
+        </h1>
+        {/* <Image
         priority
         src={characterData.pageData[0].thumbnail.path + "." + characterData.pageData[0].thumbnail.extension}
         className={utilStyles.borderCircle}
         height={200}
         width={200}
         alt={characterData.pageData[0].name} /> */}
-      <img src={characterData.response[0].thumbnail.path + '.' + characterData.response[0].thumbnail.extension}
-           className={`${utilStyles.borderCircle} ${utilStyles.characterImage}`}
-           height={200}
-           width={200} />
-      <div>
-        <p>{characterData.response[0].description}</p>
+        <img src={characterData.response[0].thumbnail.path + '.' + characterData.response[0].thumbnail.extension}
+             className={`${utilStyles.borderCircle} ${utilStyles.characterImage}`}
+             height={200}
+             width={200} />
+        <div className='description'>
+          <p>{characterData.response[0].description}</p>
+        </div>
+        <div>
+          {urlArray.map(item => (
+            <MarvelLink urlData={item} key={item.type} />
+          ))}
+        </div>
       </div>
-      <div>
-        {urlArray.map(item => (
-          <MarvelLink urlData={item} key={item.type} />
-        ))}
-      </div>
-    </div>
-
+    </CharacterPageStyles>
   </Layout>);
 }
+
+const CharacterPageStyles = styled.div`
+  .description {
+    margin: auto;
+    max-width: 700px;
+  }
+`;
