@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useCallback, useState } from 'react';
 import Character from '../components/characterSearchItem';
-import Layout, { siteTitle } from '../components/mlayout';
+import Layout, { siteTitle } from '../components/marvelLayout';
 import utilStyles from '../styles/utils.module.scss';
 import { getCharacterData, getCharacterDataByName } from '../lib/characters';
 import { debounce } from 'lodash'

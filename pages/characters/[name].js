@@ -1,4 +1,4 @@
-import Layout from '../../components/mlayout';
+import Layout from '../../components/marvelLayout';
 // import Image from 'next/image'
 import Head from 'next/head';
 import utilStyles from '../../styles/utils.module.scss';

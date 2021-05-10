@@ -35,7 +35,7 @@ export default function Layout({ children, home }) {
           </>
         ) : (
           <>
-            <Link href="/marvel">
+            <Link href="/">
               <a>
                 {/* <Image
                                     priority
