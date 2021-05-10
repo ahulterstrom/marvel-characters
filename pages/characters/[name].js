@@ -17,7 +17,7 @@ export async function getStaticProps({ params }) {
     currentName = 'Dog%20Brother%20%231';
   }
 
-  const characterData = await getCharacterPageData(currentName);
+  const characterData = await getCharacterPageData(encodeURIComponent(currentName));
   return {
     props: {
       characterData,
@@ -29,7 +29,7 @@ export async function getStaticPaths() {
   const paths = await getAllCharacterNames();
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 

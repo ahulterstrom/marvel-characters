@@ -1,6 +1,6 @@
 import Head from "next/head";
 // import Image from 'next/image'
-import styles from "./mlayout.module.css";
+import styles from "./mlayout.module.scss";
 import Link from "next/link";
 
 const name = "Marvel";
