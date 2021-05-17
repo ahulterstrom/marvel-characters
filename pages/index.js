@@ -8,7 +8,7 @@ import { debounce } from 'lodash'
 
 export async function getStaticProps() {
   const offset = 0;
-  let characterData = [];
+  let characterData;
   characterData = await getCharacterData(offset);
 
   return {
@@ -19,7 +19,7 @@ export async function getStaticProps() {
 }
 
 function Search(props) {
-  const [characterList, updateCharacters] = useState([]);
+  const [characterList, updateCharacters] = useState(props.data);
 
   const inputUpdate = useCallback((event) => {
     getCharacterDataByName(event.target.value).then(res => {
@@ -31,7 +31,7 @@ function Search(props) {
     <section>
       <div className={utilStyles.searchbar}>
         <input type='text' placeholder='Search...' onChange={debounce(inputUpdate, 800)} />
-        <div className={utilStyles.search}></div>
+        <div className={utilStyles.search}/>
       </div>
       <section>
         <ul className={utilStyles.list}>
